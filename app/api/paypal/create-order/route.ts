@@ -58,8 +58,9 @@ export async function POST(req: Request) {
     if (!orderRes.ok) {
       return NextResponse.json(
         {
-          error: orderData?.details?.?.description || orderData?.message || "PayPal Order Failed",
-          issue: orderData?.details?.?.issue,
+       error: orderData?.message || "PayPal Order Failed",
+       issue: JSON.stringify(orderData?.details || {}),
+
           rawResponse: orderData,
         },
         { status: orderRes.status }
